@@ -9,7 +9,7 @@ interface Payload {
 }
 
 const getImages = async (payload: Payload, options: Options) => {
-  const { ip, port } = options;
+  const {ip, port} = options;
   try {
     const response = await fetch(`http://${ip}:${port}/sdapi/v1/txt2img`, {
       method: 'POST',
@@ -26,4 +26,4 @@ const getImages = async (payload: Payload, options: Options) => {
   }
 };
 
-export default getImages;
+export {getImages};

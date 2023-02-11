@@ -10,6 +10,8 @@ export default StyleSheet.create({
     fontWeight: '600',
     color: 'hotpink',
     textAlign: 'center',
+    height: 50,
+    borderBottomLeftRadius: 10,
   },
   sectionTitle: {
     fontSize: 24,
@@ -23,5 +25,8 @@ export default StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  textInput: {
+    padding: 30,
   },
 });

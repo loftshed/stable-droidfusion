@@ -12,7 +12,6 @@ import * as apiUtils from '../utils/api';
 import ImageView from './ImageView/ImageView';
 
 import styles from './styles';
-import Progress from './Progress/Progress';
 
 function App(): JSX.Element {
   const [generatedImages, setGeneratedImages] = React.useState<string[]>();
@@ -29,17 +28,13 @@ function App(): JSX.Element {
   };
 
   const handleButtonPress = async () => {
-    const res = await apiUtils.getImages(
-      {
-        prompt: promptString,
-        steps: numSteps,
-      },
-      {
-        ip: '192.168.50.39',
-        port: 7860,
-      },
-    );
-    setGeneratedImages(res);
+    const res = await apiUtils.getImages({
+      prompt: promptString,
+      steps: numSteps,
+    });
+
+    setGeneratedImages(res.images);
+    // log everything but the images
   };
 
   return (
@@ -50,11 +45,12 @@ function App(): JSX.Element {
         <View>
           <Text style={styles.sectionTitle}>Options</Text>
           <TextInput
-            placeholder="Enter your prompt"
+            style={styles.textInput}
             value={promptString}
             onChangeText={text => handleChangePrompt(text)}
           />
           <TextInput
+            style={styles.textInput}
             value={numSteps.toString()}
             onChangeText={text => handleChangeSteps(Number(text))}
           />
@@ -67,7 +63,6 @@ function App(): JSX.Element {
             accessibilityLabel="Generate"
           />
         </View>
-        <Progress />
       </ScrollView>
     </SafeAreaView>
   );

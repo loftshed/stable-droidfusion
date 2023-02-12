@@ -6,10 +6,13 @@ import {Control} from 'react-hook-form';
 import {COLORS} from '../../utils/constants';
 
 const styles = StyleSheet.create({
-  promptInput: {
+  container: {
     flexDirection: 'row',
     alignItems: 'flex-end',
     gap: 10,
+  },
+  fieldStyle: {
+    flex: 1,
   },
 });
 
@@ -22,16 +25,18 @@ export default function PromptField({
   control,
   handleSubmit,
 }: PromptFieldProps): JSX.Element {
-  const handleClear = () => {};
+  const handleClear = () => {
+    console.log('clear');
+  };
   return (
-    <View style={styles.promptInput}>
+    <View style={styles.container}>
       <ControlledField
         label={'Prompt'}
         name={'prompt'}
         control={control}
         defaultValue={'A super dope ass horse riding a motorcycle'}
+        style={styles.fieldStyle}
       />
-
       <StyledButton label={'Generate'} onPress={handleSubmit} />
       <StyledButton
         label={'Clear'}

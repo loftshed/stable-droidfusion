@@ -1,14 +1,15 @@
-import React from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
+import React, {CSSProperties} from 'react';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 import {Control, Controller} from 'react-hook-form';
 import {COLORS, FONTS} from '../../../utils/constants';
-import Text from '../../Styled/Text';
+import {Text, TextInput} from '../../Styled';
 
 interface ControlledFieldProps {
   name: string;
   label: string;
   control: Control;
   defaultValue: string;
+  style?: ViewStyle;
 }
 
 const styles = StyleSheet.create({
@@ -29,17 +30,18 @@ export default function ControlledField({
   label,
   control,
   defaultValue,
+  style,
 }: ControlledFieldProps): JSX.Element {
   return (
-    <View>
+    <View style={style}>
       <Text style={styles.textFieldLabel}>{label}</Text>
       <Controller
         control={control}
         render={({field: {value, onChange}}) => (
           <TextInput
             style={styles.textField}
-            onChangeText={text => onChange(text)}
             value={value}
+            onChangeText={(text: string) => onChange(text)}
           />
         )}
         name={name}

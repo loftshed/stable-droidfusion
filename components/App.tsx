@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import {StyleSheet, SafeAreaView, ScrollView, View} from 'react-native';
 import Text from './Styled/Text';
 
 import ImageView from './ImageView/ImageView';
@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     height: 50,
     borderBottomLeftRadius: 10,
   },
+  viewOptions: {
+    flexDirection: 'row',
+  },
 });
 
 function App(): JSX.Element {
@@ -29,8 +32,10 @@ function App(): JSX.Element {
     <SafeAreaView style={styles.main}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Text style={styles.sectionHeader}>Horse Generator 64</Text>
-        <ImageView generations={generations} />
-        <Options setGenerations={setGenerations} />
+        <View style={styles.viewOptions}>
+          <ImageView generations={generations} />
+          <Options setGenerations={setGenerations} />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

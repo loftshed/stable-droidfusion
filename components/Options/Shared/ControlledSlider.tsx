@@ -25,45 +25,12 @@ const styles = StyleSheet.create({
   },
 });
 
-interface SliderInputProps {
-  label: string;
-  maximumValue: number;
-  onChange: (x: any) => void;
-  x: any;
-}
-
-function SliderInput({x, label, maximumValue, onChange}: SliderInputProps) {
-  const initialValue = x / maximumValue;
-  const [sliderPercentage, setSliderPercentage] = React.useState(initialValue);
-  const [recordedValue, setRecordedValue] = React.useState(x);
-
-  const handleSlider = (value: number, max: number) => {
-    setSliderPercentage(value);
-    setRecordedValue(Number((value * max).toFixed(0)));
-    onChange({x: Number((value * max).toFixed(0))});
-  };
-
-  return (
-    <View>
-      <Text>{label}</Text>
-      <View style={styles.optionWithValue}>
-        <Slider
-          value={sliderPercentage}
-          style={styles.slider}
-          onValueChange={value => handleSlider(value, maximumValue)}
-        />
-        <Text style={styles.optionValue}>{recordedValue}</Text>
-      </View>
-    </View>
-  );
-}
-
 interface ControlledSliderProps {
   label: string;
   name: string;
   control: Control;
   defaultValue: number;
-  maxiumumValue: number;
+  maximumValue: number;
 }
 
 export default function ControlledSlider({
@@ -71,21 +38,38 @@ export default function ControlledSlider({
   control,
   label,
   defaultValue,
-  maxiumumValue,
+  maximumValue,
 }: ControlledSliderProps): JSX.Element {
+  const [sliderValue, setSliderValue] = React.useState(defaultValue);
+  const handleSlider = (value: number, onChange: (value: number) => void) => {
+    console.log(value);
+    setSliderValue(value);
+    onChange(value);
+  };
+
   return (
-    <Controller
-      control={control}
-      name={name}
-      defaultValue={defaultValue}
-      render={({field: {value, onChange}}) => (
-        <SliderInput
-          label={label}
-          maximumValue={maxiumumValue}
-          onChange={({x}) => onChange(x)}
-          x={value}
+    <View>
+      <Text>{label}</Text>
+      <View style={styles.optionWithValue}>
+        <Controller
+          control={control}
+          name={name}
+          defaultValue={defaultValue}
+          render={({field: {value, onChange}}) => (
+            <Slider
+              lowerLimit={1}
+              upperLimit={maximumValue}
+              minimumValue={1}
+              maximumValue={maximumValue}
+              step={1}
+              value={value}
+              onValueChange={x => handleSlider(x, onChange)}
+              style={styles.slider}
+            />
+          )}
         />
-      )}
-    />
+        <Text style={styles.optionValue}>{sliderValue}</Text>
+      </View>
+    </View>
   );
 }

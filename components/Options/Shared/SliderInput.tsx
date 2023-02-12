@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Slider from '@react-native-community/slider';
 import {COLORS} from '../../../utils/constants';
+import Text from '../../Styled/Text';
 
 const styles = StyleSheet.create({
   optionHeading: {
@@ -41,7 +42,6 @@ export default function SliderInput({
   maximumValue,
   onChange,
 }: SliderInputProps) {
-  const sliderRef = React.useRef<Text>(null);
   const initialValue = x / maximumValue;
   const [sliderPercentage, setSliderPercentage] = React.useState(initialValue);
   const [recordedValue, setRecordedValue] = React.useState(x);
@@ -61,9 +61,7 @@ export default function SliderInput({
           style={styles.slider}
           onValueChange={value => handleSlider(value, maximumValue)}
         />
-        <Text ref={sliderRef} style={styles.optionValue}>
-          {recordedValue}
-        </Text>
+        <Text style={styles.optionValue}>{recordedValue}</Text>
       </View>
     </View>
   );

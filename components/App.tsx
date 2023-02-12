@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, ScrollView, Text} from 'react-native';
+import {StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import Text from './Styled/Text';
 
 import ImageView from './ImageView/ImageView';
 import Options from './Options/Options';
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   sectionHeader: {
-    fontSize: 32,
+    fontSize: 42,
     fontWeight: '600',
     color: 'hotpink',
     textAlign: 'center',

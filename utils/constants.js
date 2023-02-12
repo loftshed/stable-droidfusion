@@ -5,3 +5,10 @@ export const COLORS = {
   textField: '#CCC9DC',
   text: '#1B2A41',
 };
+
+export const FONTS = {
+  main: 'SpaceGrotesk-Bold',
+  mainRegular: 'SpaceGrotesk-Regular',
+  mainMedium: 'SpaceGrotesk-Medium',
+  mainLight: 'SpaceGrotesk-Light',
+};

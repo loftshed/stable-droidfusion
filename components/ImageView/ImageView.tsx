@@ -1,10 +1,31 @@
 import React from 'react';
-import {View, Image} from 'react-native';
-import styles from './styles';
+import {View, Image, StyleSheet} from 'react-native';
+import {COLORS} from '../../utils/constants';
+
+const styles = StyleSheet.create({
+  container: {
+    height: 500,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageContainer: {
+    backgroundColor: COLORS.textField,
+    height: 500,
+    width: 500,
+    borderRadius: 30,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+  },
+});
 
 interface ImageViewProps {
   generations: string[];
 }
+
 function ImageView({generations}: ImageViewProps): JSX.Element {
   return (
     <View style={styles.container}>

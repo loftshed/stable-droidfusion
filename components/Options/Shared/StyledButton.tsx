@@ -1,12 +1,7 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import {COLORS} from '../../../utils/constants';
-
-interface StyledButtonProps {
-  label: string;
-  color?: string;
-  onPress: () => void;
-}
+import Text from '../../Styled/Text';
 
 const styles = StyleSheet.create({
   button: {
@@ -18,6 +13,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
+interface StyledButtonProps {
+  label: string;
+  color?: string;
+  onPress: () => void;
+}
 
 function StyledButton({label, color, onPress}: StyledButtonProps): JSX.Element {
   const buttonStyle = {

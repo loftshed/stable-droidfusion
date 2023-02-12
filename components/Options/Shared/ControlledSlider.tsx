@@ -1,15 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Slider from '@react-native-community/slider';
+import Text from '../../Styled/Text';
 import {COLORS} from '../../../utils/constants';
 import {Control, Controller} from 'react-hook-form';
 
 const styles = StyleSheet.create({
-  optionHeading: {
-    fontSize: 16,
-    fontWeight: '800',
-    textAlign: 'center',
-  },
   optionValue: {
     fontSize: 16,
     fontWeight: '600',
@@ -49,7 +45,7 @@ function SliderInput({x, label, maximumValue, onChange}: SliderInputProps) {
 
   return (
     <View>
-      <Text style={styles.optionHeading}>{label}</Text>
+      <Text>{label}</Text>
       <View style={styles.optionWithValue}>
         <Slider
           value={sliderPercentage}

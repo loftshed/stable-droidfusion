@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {View, TextInput, StyleSheet} from 'react-native';
 import {Control, Controller} from 'react-hook-form';
-import {COLORS} from '../../../utils/constants';
+import {COLORS, FONTS} from '../../../utils/constants';
+import Text from '../../Styled/Text';
 
 interface ControlledFieldProps {
   name: string;
@@ -18,6 +19,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.textField,
     flex: 1,
   },
+  textFieldLabel: {
+    fontFamily: FONTS.main,
+  },
 });
 
 export default function ControlledField({
@@ -28,7 +32,7 @@ export default function ControlledField({
 }: ControlledFieldProps): JSX.Element {
   return (
     <View>
-      <Text>{label}</Text>
+      <Text style={styles.textFieldLabel}>{label}</Text>
       <Controller
         control={control}
         render={({field: {value, onChange}}) => (

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, StyleSheet, Pressable} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import {COLORS} from '../../utils/constants';
 import Lightbox from 'react-native-lightbox-v2';
 
@@ -20,10 +20,11 @@ const styles = StyleSheet.create({
 
 interface ImageViewProps {
   generations: string[];
+  selected: number;
 }
 
-function ImageView({generations}: ImageViewProps): JSX.Element {
-  const uri = `data:image/png;base64,${generations[0]}`;
+function ImageView({generations, selected}: ImageViewProps): JSX.Element {
+  const uri = `data:image/png;base64,${generations[selected]}`;
 
   if (!generations.length) {
     return <View style={styles.imageContainer} />;

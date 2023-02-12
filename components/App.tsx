@@ -29,16 +29,17 @@ const styles = StyleSheet.create({
 
 function App(): JSX.Element {
   const [generations, setGenerations] = React.useState([]);
+  const [selected, setSelected] = React.useState(0);
 
   return (
     <SafeAreaView style={styles.main}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Text style={styles.sectionHeader}>Horse Generator 64</Text>
         <View style={styles.viewOptions}>
-          <ImageView generations={generations} />
+          <ImageView generations={generations} selected={selected} />
           <Options setGenerations={setGenerations} />
         </View>
-        <CarouselView generations={generations} />
+        <CarouselView generations={generations} setSelected={setSelected} />
       </ScrollView>
     </SafeAreaView>
   );

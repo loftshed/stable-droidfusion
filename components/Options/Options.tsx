@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Button, TextInput} from 'react-native';
+import {View, Button, Text, TextInput} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import SliderInput from './Shared/SliderInput';
-import Slider from '@react-native-community/slider';
+import ControlledField from './Shared/ControlledField';
+import ControlledSlider from './Shared/ControlledSlider';
 
 import styles from './styles';
 import StyledButton from './Shared/StyledButton';
@@ -29,7 +30,7 @@ function Options({setGenerations}: OptionsProps) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputWithButton}>
+      <View style={styles.promptInput}>
         <Controller
           control={control}
           render={({field: {value, onChange}}) => (
@@ -50,45 +51,35 @@ function Options({setGenerations}: OptionsProps) {
         /> */}
       </View>
 
-      <Controller
+      <ControlledField
+        name={'seed'}
+        label={'Seed'}
         control={control}
-        name="steps"
-        defaultValue={40}
-        render={({field: {value, onChange}}) => (
-          <SliderInput
-            label={'Sampling Steps'}
-            maximumValue={150}
-            onChange={({x}) => onChange(x)}
-            x={value}
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="width"
-        defaultValue={512}
-        render={({field: {value, onChange}}) => (
-          <SliderInput
-            label={'Width'}
-            maximumValue={2048}
-            onChange={({x}) => onChange(x)}
-            x={value}
-          />
-        )}
+        defaultValue={'-1'}
       />
 
-      <Controller
+      <ControlledSlider
+        label={'Sampling Steps'}
+        name={'steps'}
         control={control}
-        name="length"
+        defaultValue={40}
+        maxiumumValue={150}
+      />
+
+      <ControlledSlider
+        label={'Width'}
+        name={'width'}
+        control={control}
         defaultValue={512}
-        render={({field: {value, onChange}}) => (
-          <SliderInput
-            label={'Length'}
-            maximumValue={2048}
-            onChange={({x}) => onChange(x)}
-            x={value}
-          />
-        )}
+        maxiumumValue={2048}
+      />
+
+      <ControlledSlider
+        label={'Height'}
+        name={'height'}
+        control={control}
+        defaultValue={512}
+        maxiumumValue={2048}
       />
     </View>
   );

@@ -18,8 +18,11 @@ export default StyleSheet.create({
     backgroundColor: COLORS.textField,
     flex: 1,
   },
-  inputWithButton: {
+  promptInput: {
     flexDirection: 'row',
     gap: 10,
+  },
+  smallInput: {
+    width: 50,
   },
 });

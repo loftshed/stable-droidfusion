@@ -1,18 +1,7 @@
+import {Txt2ImgPayload} from '../schemas/txt2img';
+
 const IP = '192.168.50.39';
 const PORT = '7860';
-
-interface Txt2ImgPayload {
-  prompt: string;
-  negative_prompt: string;
-  restore_faces: boolean;
-  sampler_name: string;
-  steps: number;
-  cfg_scale: number;
-  batch_size: number;
-  seed: number;
-  width: number;
-  height: number;
-}
 
 const getImages = async (payload: Txt2ImgPayload) => {
   try {

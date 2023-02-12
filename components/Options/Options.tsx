@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, Button, Text, TextInput} from 'react-native';
-import {useForm, Controller} from 'react-hook-form';
-import SliderInput from './Shared/SliderInput';
+import {View} from 'react-native';
+import {useForm} from 'react-hook-form';
 import ControlledField from './Shared/ControlledField';
 import ControlledSlider from './Shared/ControlledSlider';
 
@@ -10,13 +9,15 @@ import StyledButton from './Shared/StyledButton';
 import {COLORS} from '../../utils/constants';
 
 import {getImages} from '../../utils/api';
+import PromptField from './PromptField';
 
 interface OptionsProps {
   setGenerations: Function;
 }
 
 function Options({setGenerations}: OptionsProps) {
-  const {control, handleSubmit} = useForm();
+  const form = useForm();
+  const {control, handleSubmit} = form;
 
   const handleGenerate = async data => {
     const res = await getImages(data);
@@ -30,26 +31,7 @@ function Options({setGenerations}: OptionsProps) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.promptInput}>
-        <Controller
-          control={control}
-          render={({field: {value, onChange}}) => (
-            <TextInput
-              style={styles.textField}
-              onChangeText={text => onChange(text)}
-              value={value}
-            />
-          )}
-          name="prompt"
-          defaultValue="A super dope ass horse riding a motorcycle"
-        />
-        <StyledButton label={'Generate'} onPress={handleSubmit(onSubmit)} />
-        {/* <StyledButton
-          label={'Clear'}
-          color={COLORS.buttonDark}
-          onPress={handleClear}
-        /> */}
-      </View>
+      <PromptField control={control} handleSubmit={handleSubmit(onSubmit)} />
 
       <ControlledField
         name={'seed'}

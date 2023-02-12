@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, View, StyleSheet, Text} from 'react-native';
+import {Image, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {COLORS} from '../../utils/constants';
 import Carousel from 'react-native-reanimated-carousel';
@@ -7,15 +7,21 @@ import Carousel from 'react-native-reanimated-carousel';
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    height: 170,
     backgroundColor: COLORS.buttonDark,
     flexDirection: 'row',
+    justifyContent: 'center',
     columnGap: 5,
     padding: 10,
     borderRadius: 10,
   },
+  carousel: {
+    width: '100%',
+    justifyContent: 'center',
+  },
   thumbs: {
-    width: 150,
-    height: 150,
+    width: '100%',
+    height: '100%',
     borderRadius: 10,
   },
 });
@@ -27,23 +33,32 @@ interface CarouselViewProps {
 
 export default function CarouselView({
   generations,
+  setSelected,
 }: CarouselViewProps): JSX.Element {
   if (generations.length) {
     return (
       <View style={styles.container}>
         <Carousel
-          loop
           data={generations}
+          style={styles.carousel}
           onSnapToItem={index => console.log('current index:', index)}
+          width={160}
+          height={150}
+          mode="parallax"
+          modeConfig={{
+            parallaxScrollingScale: 0.9,
+            parallaxScrollingOffset: 15,
+          }}
           renderItem={({item, index}) => {
-            console.log(item);
             const key = `thumb-${index}`;
             return (
-              <Image
-                key={key}
-                source={{uri: `data:image/png;base64,${item}`}}
-                style={styles.thumbs}
-              />
+              <TouchableOpacity onPress={() => setSelected(index)}>
+                <Image
+                  key={key}
+                  source={{uri: `data:image/png;base64,${item}`}}
+                  style={styles.thumbs}
+                />
+              </TouchableOpacity>
             );
           }}
         />
@@ -51,28 +66,5 @@ export default function CarouselView({
     );
   }
 
-  return (
-    <View style={styles.container}>
-      <Text>loading...</Text>
-    </View>
-  );
+  return <View style={styles.container} />;
 }
-// export default function CarouselView({
-//   generations,
-// }: CarouselViewProps): JSX.Element {
-//   return (
-//     <View style={styles.container}>
-//       {generations?.map((generation: string, index: number) => {
-//         const key = `thumb-${index}`;
-//         console.log('key', key);
-//         return (
-//           <Image
-//             key={key}
-//             source={{uri: `data:image/png;base64,${generation}`}}
-//             style={styles.thumbs}
-//           />
-//         );
-//       })}
-//     </View>
-//   );
-// }

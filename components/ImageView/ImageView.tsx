@@ -1,12 +1,14 @@
 import React from 'react';
 import {View, Image} from 'react-native';
 import styles from './styles';
-import {ImageViewProps} from './types';
 
-function ImageView({generatedImages}: ImageViewProps): JSX.Element {
+function ImageView(): JSX.Element {
+  // const {generations} = [];
+
   return (
     <View style={styles.container}>
-      {generatedImages?.map(image => {
+      <View style={styles.imageContainer}>
+        {/* {generations?.map(image => {
         const key = image.slice(0, 10);
         return (
           <Image
@@ -15,7 +17,8 @@ function ImageView({generatedImages}: ImageViewProps): JSX.Element {
             source={{uri: `data:image/png;base64,${image}`}}
           />
         );
-      })}
+      })} */}
+      </View>
     </View>
   );
 }

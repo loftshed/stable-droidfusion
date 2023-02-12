@@ -1,10 +1,18 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../utils/constants';
 
 export default StyleSheet.create({
   container: {
-    height: 300,
+    height: 500,
     width: '100%',
-    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageContainer: {
+    backgroundColor: COLORS.textField,
+    height: 500,
+    width: 500,
+    borderRadius: 30,
   },
   image: {
     width: '100%',

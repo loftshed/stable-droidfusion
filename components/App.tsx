@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, SafeAreaView, ScrollView, Text} from 'react-native';
 
-import GenerateButton from './GenerateButton/GenerateButton';
 import ImageView from './ImageView/ImageView';
 import Options from './Options/Options';
 import {COLORS} from '../utils/constants';

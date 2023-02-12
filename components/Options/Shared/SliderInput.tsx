@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Slider from '@react-native-community/slider';
-import InputStyles from '../styles';
+import {COLORS} from '../../../utils/constants';
 
 const styles = StyleSheet.create({
   optionHeading: {
@@ -13,7 +13,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
-    minWidth: '10%',
+    width: 50,
+    backgroundColor: COLORS.buttonLight,
+    borderRadius: 5,
+    padding: 2,
   },
   optionWithValue: {
     width: '100%',
@@ -21,25 +24,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   slider: {
-    width: '90%',
+    flex: 1,
   },
 });
 
 interface SliderInputProps {
   label: string;
-  currentValue: number;
+  defaultValue: number;
   maximumValue: number;
-  setValue: (value: number) => void;
 }
 
 export default function SliderInput({
   label,
-  currentValue,
+  defaultValue,
   maximumValue,
-  setValue,
 }: SliderInputProps) {
-  const handleSlider = (value: number, max: number, setSliderValue: any) => {
-    setSliderValue(Number((value * max).toFixed(0)));
+  const initialValue = defaultValue / maximumValue;
+  const [sliderPercentage, setSliderPercentage] = React.useState(initialValue);
+  const [recordedValue, setRecordedValue] = React.useState(defaultValue);
+
+  const handleSlider = (value: number, max: number) => {
+    setSliderPercentage(value);
+    setRecordedValue(Number((value * max).toFixed(0)));
   };
 
   return (
@@ -47,11 +53,11 @@ export default function SliderInput({
       <Text style={styles.optionHeading}>{label}</Text>
       <View style={styles.optionWithValue}>
         <Slider
-          value={currentValue}
+          value={sliderPercentage}
           style={styles.slider}
-          onValueChange={value => handleSlider(value, maximumValue, setValue)}
+          onValueChange={value => handleSlider(value, maximumValue)}
         />
-        <Text style={styles.optionValue}>{currentValue}</Text>
+        <Text style={styles.optionValue}>{recordedValue}</Text>
       </View>
     </View>
   );

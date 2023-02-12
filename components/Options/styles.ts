@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {COLORS} from '../../utils/constants';
 
 export default StyleSheet.create({
   container: {
@@ -10,13 +9,6 @@ export default StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
     textAlign: 'center',
-  },
-  textField: {
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    color: COLORS.text,
-    backgroundColor: COLORS.textField,
-    flex: 1,
   },
   promptInput: {
     flexDirection: 'row',

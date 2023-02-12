@@ -1,4 +1,4 @@
-import React, {CSSProperties} from 'react';
+import React from 'react';
 import {View, StyleSheet, ViewStyle} from 'react-native';
 import {Control, Controller} from 'react-hook-form';
 import {COLORS, FONTS} from '../../../utils/constants';

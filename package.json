@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "@react-native-community/slider": "^4.4.2",
+    "patch-package": "^6.5.1",
     "react": "18.2.0",
     "react-hook-form": "^7.43.1",
     "react-native": "0.71.2",
-    "react-native-progress": "^5.0.0"
+    "react-native-lightbox-v2": "^0.9.0",
+    "react-native-progress": "^5.0.0",
+    "react-native-reanimated-carousel": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

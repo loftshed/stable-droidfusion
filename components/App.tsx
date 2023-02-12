@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, SafeAreaView, ScrollView, View} from 'react-native';
 import Text from './Styled/Text';
 
+import CarouselView from './CarouselView/CarouselView';
 import ImageView from './ImageView/ImageView';
 import Options from './Options/Options';
 import {COLORS} from '../utils/constants';
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
   },
   viewOptions: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 
@@ -36,6 +38,7 @@ function App(): JSX.Element {
           <ImageView generations={generations} />
           <Options setGenerations={setGenerations} />
         </View>
+        <CarouselView generations={generations} />
       </ScrollView>
     </SafeAreaView>
   );

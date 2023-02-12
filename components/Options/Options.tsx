@@ -5,8 +5,6 @@ import ControlledField from './Shared/ControlledField';
 import ControlledSlider from './Shared/ControlledSlider';
 import {getImages} from '../../utils/api';
 import PromptField from './PromptField';
-import Slider from '@react-native-community/slider';
-import ControlledSlider2 from './Shared/ControlledSlider';
 
 const styles = StyleSheet.create({
   container: {
@@ -83,13 +81,6 @@ function Options({setGenerations}: OptionsProps) {
       <ControlledSlider
         label={'Height'}
         name={'height'}
-        control={control}
-        defaultValue={512}
-        maximumValue={2048}
-      />
-      <ControlledSlider2
-        label={'Test'}
-        name={'test'}
         control={control}
         defaultValue={512}
         maximumValue={2048}

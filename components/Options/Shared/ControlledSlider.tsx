@@ -41,8 +41,7 @@ export default function ControlledSlider({
   maximumValue,
 }: ControlledSliderProps): JSX.Element {
   const [sliderValue, setSliderValue] = React.useState(defaultValue);
-  const handleSlider = (value: number, onChange: (value: number) => void) => {
-    console.log(value);
+  const handleSlider = (onChange: (value: number) => void, value: number) => {
     setSliderValue(value);
     onChange(value);
   };
@@ -57,13 +56,13 @@ export default function ControlledSlider({
           defaultValue={defaultValue}
           render={({field: {value, onChange}}) => (
             <Slider
-              lowerLimit={1}
-              upperLimit={maximumValue}
-              minimumValue={1}
-              maximumValue={maximumValue}
               step={1}
+              lowerLimit={1}
+              minimumValue={1}
+              upperLimit={maximumValue}
+              maximumValue={maximumValue}
               value={value}
-              onValueChange={x => handleSlider(x, onChange)}
+              onValueChange={val => handleSlider(onChange, val)}
               style={styles.slider}
             />
           )}

@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     width: 50,
     backgroundColor: COLORS.buttonLight,
     borderRadius: 5,
-    padding: 2,
+    padding: 5,
   },
   optionWithValue: {
     width: '100%',
@@ -30,22 +30,26 @@ const styles = StyleSheet.create({
 
 interface SliderInputProps {
   label: string;
-  defaultValue: number;
   maximumValue: number;
+  onChange: (x: any) => void;
+  x: any;
 }
 
 export default function SliderInput({
+  x,
   label,
-  defaultValue,
   maximumValue,
+  onChange,
 }: SliderInputProps) {
-  const initialValue = defaultValue / maximumValue;
+  const sliderRef = React.useRef<Text>(null);
+  const initialValue = x / maximumValue;
   const [sliderPercentage, setSliderPercentage] = React.useState(initialValue);
-  const [recordedValue, setRecordedValue] = React.useState(defaultValue);
+  const [recordedValue, setRecordedValue] = React.useState(x);
 
   const handleSlider = (value: number, max: number) => {
     setSliderPercentage(value);
     setRecordedValue(Number((value * max).toFixed(0)));
+    onChange({x: Number((value * max).toFixed(0))});
   };
 
   return (
@@ -57,7 +61,9 @@ export default function SliderInput({
           style={styles.slider}
           onValueChange={value => handleSlider(value, maximumValue)}
         />
-        <Text style={styles.optionValue}>{recordedValue}</Text>
+        <Text ref={sliderRef} style={styles.optionValue}>
+          {recordedValue}
+        </Text>
       </View>
     </View>
   );

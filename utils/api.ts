@@ -1,12 +1,20 @@
 const IP = '192.168.50.39';
 const PORT = '7860';
 
-interface Payload {
+interface Txt2ImgPayload {
   prompt: string;
+  negative_prompt: string;
+  restore_faces: boolean;
+  sampler_name: string;
   steps: number;
+  cfg_scale: number;
+  batch_size: number;
+  seed: number;
+  width: number;
+  height: number;
 }
 
-const getImages = async (payload: Payload) => {
+const getImages = async (payload: Txt2ImgPayload) => {
   try {
     const response = await fetch(`http://${IP}:${PORT}/sdapi/v1/txt2img`, {
       method: 'POST',

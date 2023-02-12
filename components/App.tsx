@@ -22,12 +22,14 @@ const styles = StyleSheet.create({
 });
 
 function App(): JSX.Element {
+  const [generations, setGenerations] = React.useState([]);
+
   return (
     <SafeAreaView style={styles.main}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Text style={styles.sectionHeader}>Horse Generator 64</Text>
-        <ImageView />
-        <Options />
+        <ImageView generations={generations} />
+        <Options setGenerations={setGenerations} />
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,59 +1,95 @@
 import React from 'react';
-import {View, TextInput} from 'react-native';
+import {View, Button, TextInput} from 'react-native';
+import {useForm, Controller} from 'react-hook-form';
 import SliderInput from './Shared/SliderInput';
+import Slider from '@react-native-community/slider';
 
 import styles from './styles';
 import StyledButton from './Shared/StyledButton';
 import {COLORS} from '../../utils/constants';
 
-function Options() {
-  const [prompt, setPrompt] = React.useState('Enter your prompt here');
-  const [width, setWidth] = React.useState(512);
-  const [height, setHeight] = React.useState(512);
+import {getImages} from '../../utils/api';
 
-  const handleChangePrompt = (value: string) => {
-    setPrompt(value);
+interface OptionsProps {
+  setGenerations: Function;
+}
+
+function Options({setGenerations}: OptionsProps) {
+  const {control, handleSubmit} = useForm();
+
+  const handleGenerate = async data => {
+    const res = await getImages(data);
+    setGenerations(res.images);
   };
 
-  const handleFocusPrompt = () => {
-    if (prompt === 'Enter your prompt here') {
-      setPrompt('');
-    }
-  };
-
-  const handleClear = () => {
-    setPrompt('');
-  };
-
-  const handleGenerate = async () => {
-    // const res = await apiUtils.getImages({prompt, steps});
-    // setGenerations(res.images);
-    console.log('honk honk');
+  const onSubmit = (data: Object) => {
+    console.log(data);
+    handleGenerate(data);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.inputWithButton}>
-        <TextInput
-          style={styles.textField}
-          value={prompt}
-          onChangeText={text => handleChangePrompt(text)}
-          onFocus={handleFocusPrompt}
+        <Controller
+          control={control}
+          render={({field: {value, onChange}}) => (
+            <TextInput
+              style={styles.textField}
+              onChangeText={text => onChange(text)}
+              value={value}
+            />
+          )}
+          name="prompt"
+          defaultValue="A super dope ass horse riding a motorcycle"
         />
-        <StyledButton label={'Generate'} onPress={handleGenerate} />
-        <StyledButton
+        <StyledButton label={'Generate'} onPress={handleSubmit(onSubmit)} />
+        {/* <StyledButton
           label={'Clear'}
           color={COLORS.buttonDark}
           onPress={handleClear}
-        />
+        /> */}
       </View>
-      <SliderInput
-        label="Sampling Steps"
+
+      <Controller
+        control={control}
+        name="steps"
         defaultValue={40}
-        maximumValue={150}
+        render={({field: {value, onChange}}) => (
+          <SliderInput
+            label={'Sampling Steps'}
+            maximumValue={150}
+            onChange={({x}) => onChange(x)}
+            x={value}
+          />
+        )}
       />
-      <SliderInput label="Width" defaultValue={512} maximumValue={1024} />
-      <SliderInput label="Height" defaultValue={512} maximumValue={1024} />
+      <Controller
+        control={control}
+        name="width"
+        defaultValue={512}
+        render={({field: {value, onChange}}) => (
+          <SliderInput
+            label={'Width'}
+            maximumValue={2048}
+            onChange={({x}) => onChange(x)}
+            x={value}
+          />
+        )}
+      />
+
+      <Controller
+        control={control}
+        name="length"
+        defaultValue={512}
+        render={({field: {value, onChange}}) => (
+          <SliderInput
+            label={'Length'}
+            maximumValue={2048}
+            onChange={({x}) => onChange(x)}
+            x={value}
+          />
+        )}
+      />
     </View>
   );
 }

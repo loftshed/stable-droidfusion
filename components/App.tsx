@@ -6,6 +6,7 @@ import CarouselView from './CarouselView/CarouselView';
 import ImageView from './ImageView/ImageView';
 import Options from './Options/Options';
 import {COLORS} from '../utils/constants';
+import ModelPicker from './Options/ModelPicker';
 
 const styles = StyleSheet.create({
   main: {
@@ -35,11 +36,18 @@ function App(): JSX.Element {
     <SafeAreaView style={styles.main}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Text style={styles.sectionHeader}>Horse Generator 64</Text>
+        <ModelPicker />
         <View style={styles.viewOptions}>
-          <ImageView generations={generations} selected={selected} />
+          <View style={{position: 'relative'}}>
+            <ImageView generations={generations} selected={selected} />
+            <CarouselView
+              style={{position: 'absolute', bottom: 0}}
+              generations={generations}
+              setSelected={setSelected}
+            />
+          </View>
           <Options setGenerations={setGenerations} />
         </View>
-        <CarouselView generations={generations} setSelected={setSelected} />
       </ScrollView>
     </SafeAreaView>
   );

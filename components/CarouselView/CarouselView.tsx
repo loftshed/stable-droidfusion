@@ -1,23 +1,19 @@
 import React from 'react';
 import {Image, View, StyleSheet, TouchableOpacity} from 'react-native';
-
-import {COLORS} from '../../utils/constants';
 import Carousel from 'react-native-reanimated-carousel';
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: '100%',
-    height: 170,
-    backgroundColor: COLORS.buttonDark,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    columnGap: 5,
-    padding: 10,
-    borderRadius: 10,
+    height: 50,
+    alignItems: 'center',
   },
   carousel: {
-    width: '100%',
     justifyContent: 'center',
+    width: '90%',
+    backgroundColor: 'rgba(36, 36, 36, 0.7)',
+    borderRadius: 10,
   },
   thumbs: {
     width: '100%',
@@ -29,25 +25,27 @@ const styles = StyleSheet.create({
 interface CarouselViewProps {
   generations: string[];
   setSelected: (index: number) => void;
+  style?: object;
 }
 
 export default function CarouselView({
   generations,
   setSelected,
-}: CarouselViewProps): JSX.Element {
-  if (generations.length) {
+  style,
+}: CarouselViewProps): JSX.Element | undefined {
+  if (generations.length > 1) {
     return (
-      <View style={styles.container}>
+      <View style={{...style, ...styles.container}}>
         <Carousel
           data={generations}
           style={styles.carousel}
           onSnapToItem={index => console.log('current index:', index)}
-          width={160}
-          height={150}
+          width={75}
+          height={75}
           mode="parallax"
           modeConfig={{
-            parallaxScrollingScale: 0.9,
-            parallaxScrollingOffset: 15,
+            parallaxScrollingScale: 1,
+            parallaxScrollingOffset: -5,
           }}
           renderItem={({item, index}) => {
             const key = `thumb-${index}`;
@@ -65,6 +63,4 @@ export default function CarouselView({
       </View>
     );
   }
-
-  return <View style={styles.container} />;
 }

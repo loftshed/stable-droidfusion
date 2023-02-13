@@ -20,6 +20,22 @@ const getImages = async (payload: Txt2ImgPayload) => {
   }
 };
 
+const getModelList = async () => {
+  try {
+    const response = await fetch(`http://${IP}:${PORT}/sdapi/v1/sd-models`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 /* const getProgress = async () => {
   try {
     const response = await fetch(`http://${IP}:${PORT}/sdapi/v1/progress`, {
@@ -36,4 +52,4 @@ const getImages = async (payload: Txt2ImgPayload) => {
   }
 }; */
 
-export {getImages};
+export {getImages, getModelList};

@@ -1,4 +1,4 @@
-interface Img2ImgPayload {
+export interface Img2ImgPayload {
   init_images?: string[];
   resize_mode?: number;
   denoising_strength?: number;

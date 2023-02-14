@@ -32,7 +32,7 @@ export default function CarouselView({
   generations,
   setSelected,
   style,
-}: CarouselViewProps): JSX.Element | undefined {
+}: CarouselViewProps): JSX.Element {
   if (generations.length > 1) {
     return (
       <View style={{...style, ...styles.container}}>
@@ -63,4 +63,6 @@ export default function CarouselView({
       </View>
     );
   }
+
+  return <View />;
 }

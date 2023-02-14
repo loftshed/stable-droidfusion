@@ -1,4 +1,4 @@
-import {Txt2ImgPayload} from '../schemas/txt2img';
+import type {SDConfig, Txt2ImgPayload} from '../schemas/';
 
 const IP = '192.168.50.39';
 const PORT = '7860';
@@ -12,6 +12,39 @@ const getImages = async (payload: Txt2ImgPayload) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
+    });
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const setConfig = async (payload: SDConfig) => {
+  try {
+    const response = await fetch(`http://${IP}:${PORT}/sdapi/v1/options`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const getConfig = async () => {
+  try {
+    const response = await fetch(`http://${IP}:${PORT}/sdapi/v1/options`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     });
     const json = await response.json();
     return json;
@@ -36,9 +69,9 @@ const getModelList = async () => {
   }
 };
 
-/* const getProgress = async () => {
+const getSamplerList = async () => {
   try {
-    const response = await fetch(`http://${IP}:${PORT}/sdapi/v1/progress`, {
+    const response = await fetch(`http://${IP}:${PORT}/sdapi/v1/samplers`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -48,8 +81,8 @@ const getModelList = async () => {
     const json = await response.json();
     return json;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
-}; */
+};
 
-export {getImages, getModelList};
+export {getImages, getModelList, getSamplerList, getConfig, setConfig};

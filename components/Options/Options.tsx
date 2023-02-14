@@ -5,6 +5,7 @@ import ControlledField from './Shared/ControlledField';
 import ControlledSlider from './Shared/ControlledSlider';
 import {getImages} from '../../utils/api';
 import PromptField from './PromptField';
+import {defaultOptions} from './defaults';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,6 +29,8 @@ function Options({setGenerations}: OptionsProps) {
     setGenerations(res.images);
   };
 
+  // Collect all options in an array and just map over them
+
   return (
     <View style={styles.container}>
       <PromptField control={control} handleSubmit={handleSubmit(onSubmit)} />
@@ -35,55 +38,55 @@ function Options({setGenerations}: OptionsProps) {
         name={'negative_prompt'}
         label={'Negative Prompt'}
         control={control}
-        defaultValue={''}
+        defaultValue={defaultOptions.general.negativePrompt.def}
       />
       <ControlledField
         name={'seed'}
         label={'Seed'}
         control={control}
-        defaultValue={'-1'}
+        defaultValue={defaultOptions.general.seed.def}
       />
       <ControlledSlider
         label={'Sampling Steps'}
         name={'steps'}
         control={control}
-        defaultValue={40}
-        maximumValue={150}
+        defaultValue={defaultOptions.general.steps.def}
+        maximumValue={defaultOptions.general.steps.max}
       />
       <ControlledSlider
         label={'CFG Scale'}
         name={'cfg_scale'}
         control={control}
-        defaultValue={7}
-        maximumValue={15}
+        defaultValue={defaultOptions.general.cfgScale.def}
+        maximumValue={defaultOptions.general.cfgScale.max}
       />
       <ControlledSlider
         label={'Batch Count'}
         name={'n_iter'}
         control={control}
-        defaultValue={1}
-        maximumValue={8}
+        defaultValue={defaultOptions.general.batchCount.def}
+        maximumValue={defaultOptions.general.batchCount.max}
       />
       <ControlledSlider
         label={'Batch Size'}
         name={'batch_size'}
         control={control}
-        defaultValue={1}
-        maximumValue={100}
+        defaultValue={defaultOptions.general.batchSize.def}
+        maximumValue={defaultOptions.general.batchSize.max}
       />
       <ControlledSlider
         label={'Width'}
         name={'width'}
         control={control}
-        defaultValue={512}
-        maximumValue={2048}
+        defaultValue={defaultOptions.general.width.def}
+        maximumValue={defaultOptions.general.width.max}
       />
       <ControlledSlider
         label={'Height'}
         name={'height'}
         control={control}
-        defaultValue={512}
-        maximumValue={2048}
+        defaultValue={defaultOptions.general.height.def}
+        maximumValue={defaultOptions.general.height.max}
       />
     </View>
   );

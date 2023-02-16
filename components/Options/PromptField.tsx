@@ -37,7 +37,10 @@ export default function PromptField({
         label={'Prompt'}
         name={'prompt'}
         style={styles.fieldStyle}
-        valueProps={{defaultValue: 'A super cool horse'}}
+        valueProps={{
+          defaultValue:
+            'A wildlife photograph showcasing the beauty and grace of a horse in its natural habitat. Rim lighting in a portrait, with a bright light positioned behind the subject to create a halo effect around the edges.',
+        }}
         multiLine
       />
       <StyledButton label={'Generate'} onPress={handleSubmit(onSubmit)} />

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {StyleSheet, SafeAreaView, ScrollView, View} from 'react-native';
 import Text from './Styled/Text';
@@ -5,6 +6,9 @@ import ImageView from './ImageView/ImageView';
 import Options from './Options/Options';
 import {COLORS} from '../utils/constants';
 import {useForm, FormProvider} from 'react-hook-form';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import ConfigPicker from './Options/Shared/ConfigPicker';
+import {getModelList} from '../utils/api';
 
 const styles = StyleSheet.create({
   main: {
@@ -20,10 +24,6 @@ const styles = StyleSheet.create({
     height: 50,
     borderBottomLeftRadius: 10,
   },
-  viewOptions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
 });
 
 function App(): JSX.Element {
@@ -32,22 +32,21 @@ function App(): JSX.Element {
   const methods = useForm();
 
   return (
-    <FormProvider {...methods}>
-      <SafeAreaView style={styles.main}>
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <Text style={styles.sectionHeader}>Horse Generator 64</Text>
-          <View style={styles.viewOptions}>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <FormProvider {...methods}>
+        <SafeAreaView style={styles.main}>
+          <ScrollView contentInsetAdjustmentBehavior="automatic">
+            <ConfigPicker
+              label={'Checkpoint'}
+              reqKey={'sd_model_checkpoint'}
+              endpoint={getModelList}
+            />
             <ImageView generations={generations} selected={selected} />
-            {/* <CarouselView
-              style={{position: 'absolute', bottom: 0}}
-              generations={generations}
-              setSelected={setSelected}
-            /> */}
             <Options setGenerations={setGenerations} />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </FormProvider>
+          </ScrollView>
+        </SafeAreaView>
+      </FormProvider>
+    </GestureHandlerRootView>
   );
 }
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {useFormContext} from 'react-hook-form';
 import ControlledField from './Shared/ControlledField';
 import ControlledSlider from './Shared/ControlledSlider';
-import {getImages, getModelList, getSamplerList} from '../../utils/api';
+import {getSamplerList} from '../../utils/api';
 import PromptField from './PromptField';
 import {defaultOptions} from './defaults';
 import ConfigPicker from './Shared/ConfigPicker';
@@ -24,11 +23,6 @@ function Options({setGenerations}: OptionsProps) {
   // Collect all options in an array and just map over them
   return (
     <View style={styles.container}>
-      <ConfigPicker
-        label={'Checkpoint'}
-        reqKey={'sd_model_checkpoint'}
-        endpoint={getModelList}
-      />
       <ConfigPicker
         label={'Sampler'}
         reqKey={'sampler_name'}

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {useForm} from 'react-hook-form';
+import {useFormContext} from 'react-hook-form';
 import ControlledField from './Shared/ControlledField';
 import ControlledSlider from './Shared/ControlledSlider';
 import {getImages, getModelList, getSamplerList} from '../../utils/api';
@@ -21,15 +21,7 @@ interface OptionsProps {
 }
 
 function Options({setGenerations}: OptionsProps) {
-  const {handleSubmit} = useForm();
-
-  const onSubmit = async (data: Object) => {
-    const res = await getImages(data);
-    setGenerations(res.images);
-  };
-
   // Collect all options in an array and just map over them
-
   return (
     <View style={styles.container}>
       <ConfigPicker
@@ -43,7 +35,7 @@ function Options({setGenerations}: OptionsProps) {
         endpoint={getSamplerList}
         isForm
       />
-      <PromptField handleSubmit={handleSubmit(onSubmit)} />
+      <PromptField setGenerations={setGenerations} />
       <ControlledField
         name={'negative_prompt'}
         label={'Negative Prompt'}

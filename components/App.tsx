@@ -1,8 +1,6 @@
 import React from 'react';
 import {StyleSheet, SafeAreaView, ScrollView, View} from 'react-native';
 import Text from './Styled/Text';
-
-import CarouselView from './CarouselView/CarouselView';
 import ImageView from './ImageView/ImageView';
 import Options from './Options/Options';
 import {COLORS} from '../utils/constants';
@@ -39,14 +37,12 @@ function App(): JSX.Element {
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <Text style={styles.sectionHeader}>Horse Generator 64</Text>
           <View style={styles.viewOptions}>
-            <View style={{position: 'relative'}}>
-              <ImageView generations={generations} selected={selected} />
-              <CarouselView
-                style={{position: 'absolute', bottom: 0}}
-                generations={generations}
-                setSelected={setSelected}
-              />
-            </View>
+            <ImageView generations={generations} selected={selected} />
+            {/* <CarouselView
+              style={{position: 'absolute', bottom: 0}}
+              generations={generations}
+              setSelected={setSelected}
+            /> */}
             <Options setGenerations={setGenerations} />
           </View>
         </ScrollView>

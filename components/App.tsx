@@ -6,7 +6,7 @@ import CarouselView from './CarouselView/CarouselView';
 import ImageView from './ImageView/ImageView';
 import Options from './Options/Options';
 import {COLORS} from '../utils/constants';
-import ModelPicker from './Options/ModelPicker';
+import {useForm, FormProvider} from 'react-hook-form';
 
 const styles = StyleSheet.create({
   main: {
@@ -31,25 +31,27 @@ const styles = StyleSheet.create({
 function App(): JSX.Element {
   const [generations, setGenerations] = React.useState([]);
   const [selected, setSelected] = React.useState(0);
+  const methods = useForm();
 
   return (
-    <SafeAreaView style={styles.main}>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Text style={styles.sectionHeader}>Horse Generator 64</Text>
-        <ModelPicker />
-        <View style={styles.viewOptions}>
-          <View style={{position: 'relative'}}>
-            <ImageView generations={generations} selected={selected} />
-            <CarouselView
-              style={{position: 'absolute', bottom: 0}}
-              generations={generations}
-              setSelected={setSelected}
-            />
+    <FormProvider {...methods}>
+      <SafeAreaView style={styles.main}>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <Text style={styles.sectionHeader}>Horse Generator 64</Text>
+          <View style={styles.viewOptions}>
+            <View style={{position: 'relative'}}>
+              <ImageView generations={generations} selected={selected} />
+              <CarouselView
+                style={{position: 'absolute', bottom: 0}}
+                generations={generations}
+                setSelected={setSelected}
+              />
+            </View>
+            <Options setGenerations={setGenerations} />
           </View>
-          <Options setGenerations={setGenerations} />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
+    </FormProvider>
   );
 }
 

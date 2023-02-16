@@ -1,15 +1,17 @@
 import React from 'react';
 import {View, StyleSheet, ViewStyle} from 'react-native';
-import {Control, Controller} from 'react-hook-form';
+import {Controller, useFormContext} from 'react-hook-form';
 import {COLORS, FONTS} from '../../../utils/constants';
 import {Text, TextInput} from '../../Styled';
 
 interface ControlledFieldProps {
   name: string;
   label: string;
-  control: Control;
-  defaultValue: string;
   style?: ViewStyle;
+  multiLine?: boolean;
+  valueProps: {
+    defaultValue: string;
+  };
 }
 
 const styles = StyleSheet.create({
@@ -28,10 +30,14 @@ const styles = StyleSheet.create({
 export default function ControlledField({
   name,
   label,
-  control,
-  defaultValue,
   style,
+  valueProps,
+  multiLine = false,
 }: ControlledFieldProps): JSX.Element {
+  const fieldStyle = {...styles.textField, ...style};
+  const {control} = useFormContext();
+  const {defaultValue} = valueProps;
+
   return (
     <View style={style}>
       <Text style={styles.textFieldLabel}>{label}</Text>
@@ -39,9 +45,10 @@ export default function ControlledField({
         control={control}
         render={({field: {value, onChange}}) => (
           <TextInput
-            style={styles.textField}
+            style={fieldStyle}
             value={value}
             onChangeText={(text: string) => onChange(text)}
+            multiline={multiLine}
           />
         )}
         name={name}

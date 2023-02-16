@@ -63,7 +63,10 @@ const getModelList = async () => {
       },
     });
     const json = await response.json();
-    return json;
+    const models = json.map((item: any) => {
+      return item.model_name;
+    });
+    return models;
   } catch (error) {
     console.error(error);
   }
@@ -79,7 +82,10 @@ const getSamplerList = async () => {
       },
     });
     const json = await response.json();
-    return json;
+    const samplers = json.map((item: any) => {
+      return item.name;
+    });
+    return samplers;
   } catch (error) {
     console.error(error);
   }

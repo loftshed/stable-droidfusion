@@ -2,53 +2,67 @@ import React, {useEffect, useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import {SDConfig} from '../../../schemas/config';
 import {setConfig} from '../../../utils/api';
+import {Text} from '../../Styled';
+import {View} from 'react-native';
+import {useFormContext} from 'react-hook-form';
 
-// pas encore assez generique mais on y travaille
 interface ConfigPickerProps {
-  name: string;
-  setOption: (value: string) => void;
-  getOptions: () => Promise<string[]>;
+  label?: string;
+  endpoint: () => Promise<string[]>;
+  reqKey: string;
+  style?: object;
+  isForm?: boolean;
 }
 
+/**
+ * @param {string} label - Label for the picker
+ * @param {function} endpoint - Function that returns a list of options
+ * @param {string} reqKey - Key for the request body
+ * @param {object} style - Optional style object for the View wrapping the picker
+ * @param {string} opts - Optional group name for the picker
+ */
 export default function ConfigPicker({
-  name,
-  setOption,
-  getOptions,
+  label,
+  endpoint,
+  reqKey,
+  style,
+  isForm,
 }: ConfigPickerProps): JSX.Element {
   const [pickerOptions, setPickerOptions] = useState(['']);
   const [selectedOption, setSelectedOption] = useState('');
+  const {setValue} = useFormContext();
 
   useEffect(() => {
     async function fetchData() {
-      const options = await getOptions();
+      const options = await endpoint();
       setPickerOptions(options);
     }
     fetchData();
-  }, [getOptions]);
+  }, [endpoint]);
 
   const handleSelectOption = async (value: string) => {
     setSelectedOption(value);
+    if (isForm) {
+      setValue(reqKey, value);
+      return;
+    }
     const payload: SDConfig = {
-      sd_model_checkpoint: value,
+      [reqKey]: value,
     };
     return setConfig(payload);
   };
 
   return (
-    <Picker
-      onValueChange={(value: string) => handleSelectOption(value)}
-      selectedValue={selectedOption}>
-      {pickerOptions.map(({name}, index) => {
-        const selectedOption: string = name;
-        const key = `${selectedOption.slice(0, 20)}-${index}`;
-        return (
-          <Picker.Item
-            key={key}
-            label={selectedOption}
-            value={selectedOption}
-          />
-        );
-      })}
-    </Picker>
+    <View style={style}>
+      {label && <Text>{label}</Text>}
+      <Picker
+        onValueChange={(value: string) => handleSelectOption(value)}
+        selectedValue={selectedOption}>
+        {pickerOptions.map((option, index) => {
+          const key = `${selectedOption.slice(0, 20)}-${index}`;
+          return <Picker.Item key={key} label={option} value={option} />;
+        })}
+      </Picker>
+    </View>
   );
 }

@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import Slider from '@react-native-community/slider';
 import Text from '../../Styled/Text';
 import {COLORS} from '../../../utils/constants';
-import {Control, Controller} from 'react-hook-form';
+import {Controller, useFormContext} from 'react-hook-form';
 
 const styles = StyleSheet.create({
   optionValue: {
@@ -28,23 +28,23 @@ const styles = StyleSheet.create({
 interface ControlledSliderProps {
   label: string;
   name: string;
-  control: Control;
-  defaultValue: number;
-  maximumValue: number;
+  valueProps: {
+    defaultValue: number;
+    maximumValue: number;
+  };
 }
 
 export default function ControlledSlider({
   name,
-  control,
   label,
-  defaultValue,
-  maximumValue,
+  valueProps: {defaultValue, maximumValue},
 }: ControlledSliderProps): JSX.Element {
   const [sliderValue, setSliderValue] = React.useState(defaultValue);
   const handleSlider = (onChange: (value: number) => void, value: number) => {
     setSliderValue(value);
     onChange(value);
   };
+  const {control} = useFormContext();
 
   return (
     <View>

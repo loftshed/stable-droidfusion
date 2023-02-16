@@ -1,4 +1,4 @@
-export interface SDConfig {
+export interface AdvancedOptions {
   samples_save?: boolean;
   samples_format?: string;
   samples_filename_pattern?: string;

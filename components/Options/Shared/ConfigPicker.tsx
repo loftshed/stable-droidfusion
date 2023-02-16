@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
-import {SDConfig} from '../../../schemas/config';
+import {AdvancedOptions} from '../../../schemas/config';
 import {setConfig} from '../../../utils/api';
 import {Text} from '../../Styled';
 import {View} from 'react-native';
@@ -46,7 +46,7 @@ export default function ConfigPicker({
       setValue(reqKey, value);
       return;
     }
-    const payload: SDConfig = {
+    const payload: AdvancedOptions = {
       [reqKey]: value,
     };
     return setConfig(payload);

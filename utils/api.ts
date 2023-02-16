@@ -1,4 +1,4 @@
-import type {SDConfig, Txt2ImgPayload} from '../schemas/';
+import type {AdvancedOptions, Txt2ImgPayload} from '../schemas/';
 
 const IP = '192.168.50.39';
 const PORT = '7860';
@@ -20,7 +20,7 @@ const getImages = async (payload: Txt2ImgPayload) => {
   }
 };
 
-const setConfig = async (payload: SDConfig) => {
+const setConfig = async (payload: AdvancedOptions) => {
   try {
     const response = await fetch(`http://${IP}:${PORT}/sdapi/v1/options`, {
       method: 'POST',

@@ -34,6 +34,11 @@ interface ControlledSliderProps {
   };
 }
 
+/** ControlledSlider wraps a react-hook-form Controller around a Slider
+ * @param {string} name - The name of the field to the API
+ * @param {string} label - A string to display above the field
+ * @param {object} valueProps - Default value and maximum value for the slider
+ */
 export default function ControlledSlider({
   name,
   label,

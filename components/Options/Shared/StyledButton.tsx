@@ -18,6 +18,11 @@ interface StyledButtonProps {
   onPress: () => void;
 }
 
+/** StyledButton is a button with a default style
+ * @param {string} label - The text to display on the button
+ * @param {string} color - The background color of the button
+ * @param {function} onPress - The function to call when the button is pressed
+ */
 function StyledButton({label, color, onPress}: StyledButtonProps): JSX.Element {
   const buttonStyle = {
     ...styles.button,

@@ -19,7 +19,7 @@ interface ConfigPickerProps {
  * @param {function} endpoint - Function that returns a list of options
  * @param {string} reqKey - Key for the request body
  * @param {object} style - Optional style object for the View wrapping the picker
- * @param {string} opts - Optional group name for the picker
+ * @param {boolean} isForm - Whether the picker is in a form
  */
 export default function ConfigPicker({
   label,

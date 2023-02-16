@@ -27,6 +27,13 @@ const styles = StyleSheet.create({
   },
 });
 
+/** ControlledField wraps a react-hook-form Controller around a TextInput
+ * @param {string} name - The name of the field to the API
+ * @param {string} label - A string to display above the field
+ * @param {object} style - Optional style object for the View wrapping the TextInput
+ * @param {object} valueProps - Props for the value of the field
+ * @param {boolean} multiLine - Whether the field should be multiline
+ */
 export default function ControlledField({
   name,
   label,

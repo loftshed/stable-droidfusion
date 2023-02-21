@@ -7,7 +7,7 @@ import {COLORS} from '../utils/constants';
 import {useForm, FormProvider} from 'react-hook-form';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ConfigPicker from './Options/Shared/ConfigPicker';
-import {getModelList} from '../utils/api';
+import {getModelList} from '../api';
 
 const styles = StyleSheet.create({
   main: {

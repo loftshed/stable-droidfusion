@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import StyledButton from './Shared/StyledButton';
 import ControlledField from './Shared/ControlledField';
 import {useFormContext} from 'react-hook-form';
-import {getImages} from '../../utils/api';
+import {getImages} from '../../api';
 
 const styles = StyleSheet.create({
   container: {

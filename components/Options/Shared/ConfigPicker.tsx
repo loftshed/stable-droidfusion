@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
-import {AdvancedOptions} from '../../../schemas/config';
-import {setConfig} from '../../../utils/api';
+import {AdvancedOptions} from '../../../api/interfaces/config';
+import {setConfig} from '../../../api';
 import {Text} from '../../Styled';
 import {View, StyleSheet} from 'react-native';
 import {useFormContext} from 'react-hook-form';

@@ -1,32 +1,10 @@
 import * as React from 'react';
-import {View, Image, StyleSheet, useWindowDimensions} from 'react-native';
-import {COLORS} from '../../utils/constants';
+import {View, Image, useWindowDimensions} from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
 import Carousel from 'react-native-reanimated-carousel';
 import Lightbox from 'react-native-lightbox-v2';
 import {Text} from '../Styled';
-
-const styles = StyleSheet.create({
-  imageContainer: {
-    alignItems: 'center',
-  },
-  image: {
-    height: '100%',
-    resizeMode: 'contain',
-    borderRadius: 15,
-  },
-  lightbox: {
-    alignItems: 'center',
-  },
-  spacer: {
-    width: '100%',
-    height: '100%',
-    color: 'orange',
-    backgroundColor: COLORS.dark.secondary,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+import styles from './ImageView.styles';
 
 interface ImageViewProps {
   generations: {
@@ -38,18 +16,17 @@ interface ImageViewProps {
 }
 
 /* Put these somewhere else later */
-const spacer = <View id="spacer" style={styles.spacer} />;
-const emptyView = (
-  <View style={styles.image}>
-    <Text style={styles.spacer} content={'Nothing to display :('} />
-  </View>
-);
-
+const spacer = <View id="spacer" style={styles.noImg} />;
 /* ------------------------------ */
 
 function ImageView({generations, selected}: ImageViewProps): JSX.Element {
   const progressValue = useSharedValue<number>(0);
   const imageSize = useWindowDimensions().height * 0.5;
+  const emptyView = (
+    <View style={{...{width: imageSize, height: imageSize}, ...styles.noImg}}>
+      <Text content={'Nothing to display :('} />
+    </View>
+  );
 
   const getImages = () => {
     if (!generations) {
@@ -86,8 +63,8 @@ function ImageView({generations, selected}: ImageViewProps): JSX.Element {
         }
         mode="parallax"
         modeConfig={{
-          parallaxScrollingScale: 0.9,
-          parallaxScrollingOffset: 275,
+          parallaxScrollingScale: 0.85,
+          parallaxScrollingOffset: 100,
         }}
         data={carouselItems}
         renderItem={({item}) => {

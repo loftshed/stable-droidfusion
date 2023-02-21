@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import ControlledField from './Shared/ControlledField';
 import ControlledSlider from './Shared/ControlledSlider';
-import {getSamplerList} from '../../utils/api';
+import {getSamplerList} from '../../api';
 import PromptField from './PromptField';
 import {defaultOptions} from './defaults';
 import ConfigPicker from './Shared/ConfigPicker';

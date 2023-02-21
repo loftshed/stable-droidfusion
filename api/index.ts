@@ -1,4 +1,4 @@
-import type {AdvancedOptions, Txt2ImgPayload} from '../schemas/';
+import type {AdvancedOptions, Txt2ImgPayload} from './interfaces';
 
 const IP = '192.168.50.39';
 const PORT = '7860';

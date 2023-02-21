@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text as DefaultText, StyleSheet} from 'react-native';
+import {Text as DefaultText, View, StyleSheet} from 'react-native';
 import {FONTS} from '../../utils/constants';
 
 const {textStyle} = StyleSheet.create({
@@ -7,11 +7,16 @@ const {textStyle} = StyleSheet.create({
     fontFamily: FONTS.main,
   },
 });
+
 interface TextProps {
-  children: React.ReactNode;
+  content: string | number;
   style?: object;
 }
 
-export default function Text({children, style}: TextProps): JSX.Element {
-  return <DefaultText style={{...textStyle, ...style}}>{children}</DefaultText>;
+export default function Text({content, style}: TextProps): JSX.Element {
+  return (
+    <View>
+      <DefaultText style={{...textStyle, ...style}}>{content}</DefaultText>
+    </View>
+  );
 }

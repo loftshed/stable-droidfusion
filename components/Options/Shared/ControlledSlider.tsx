@@ -53,7 +53,7 @@ export default function ControlledSlider({
 
   return (
     <View>
-      <Text>{label}</Text>
+      <Text content={label} />
       <View style={styles.optionWithValue}>
         <Controller
           control={control}
@@ -72,7 +72,7 @@ export default function ControlledSlider({
             />
           )}
         />
-        <Text style={styles.optionValue}>{sliderValue}</Text>
+        <Text content={sliderValue} style={styles.optionValue} />
       </View>
     </View>
   );

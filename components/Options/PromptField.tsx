@@ -26,9 +26,8 @@ export default function PromptField({
   const {handleSubmit} = useFormContext();
 
   const onSubmit = async (data: Object) => {
-    console.log(data);
-    const res = await getImages(data);
-    setGenerations(res.images);
+    const response = await getImages(data);
+    setGenerations(response);
   };
 
   return (

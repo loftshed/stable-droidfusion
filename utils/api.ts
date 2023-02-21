@@ -13,8 +13,7 @@ const getImages = async (payload: Txt2ImgPayload) => {
       },
       body: JSON.stringify(payload),
     });
-    const json = await response.json();
-    return json;
+    return response.json();
   } catch (error) {
     console.error(error);
   }

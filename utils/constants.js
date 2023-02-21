@@ -1,5 +1,12 @@
 export const COLORS = {
-  bgDark: '#0c1821',
+  dark: {
+    bg: '#0c1821',
+    primary: '#112B3C',
+    secondary: '#205375',
+    button: '#eb6424',
+    text: '#EFEFEF',
+  },
+
   buttonDark: '#001219',
   buttonLight: '#eb6424',
   textField: '#CCC9DC',

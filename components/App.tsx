@@ -1,7 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {StyleSheet, SafeAreaView, ScrollView, View} from 'react-native';
-import Text from './Styled/Text';
+import {StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import ImageView from './ImageView/ImageView';
 import Options from './Options/Options';
 import {COLORS} from '../utils/constants';
@@ -12,7 +11,7 @@ import {getModelList} from '../utils/api';
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: COLORS.bgDark,
+    backgroundColor: COLORS.dark.bg,
     minHeight: '100%',
     padding: 10,
   },
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
 });
 
 function App(): JSX.Element {
-  const [generations, setGenerations] = React.useState([]);
+  const [generations, setGenerations] = React.useState(null);
   const [selected, setSelected] = React.useState(0);
   const methods = useForm();
 

@@ -31,7 +31,7 @@ function StyledButton({label, color, onPress}: StyledButtonProps): JSX.Element {
   return (
     <View>
       <TouchableOpacity style={buttonStyle} onPress={onPress}>
-        <Text>{label}</Text>
+        <Text content={label} />
       </TouchableOpacity>
     </View>
   );

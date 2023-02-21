@@ -3,8 +3,9 @@ import {Picker} from '@react-native-picker/picker';
 import {AdvancedOptions} from '../../../schemas/config';
 import {setConfig} from '../../../utils/api';
 import {Text} from '../../Styled';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useFormContext} from 'react-hook-form';
+import {COLORS} from '../../../utils/constants';
 
 interface ConfigPickerProps {
   label?: string;
@@ -13,6 +14,13 @@ interface ConfigPickerProps {
   style?: object;
   isForm?: boolean;
 }
+
+const styles = StyleSheet.create({
+  picker: {
+    backgroundColor: COLORS.bgDark,
+    borderRadius: 15,
+  },
+});
 
 /**
  * @param {string} label - Label for the picker
@@ -54,8 +62,9 @@ export default function ConfigPicker({
 
   return (
     <View style={style}>
-      {label && <Text>{label}</Text>}
+      {label && <Text content={label} />}
       <Picker
+        style={styles.picker}
         onValueChange={(value: string) => handleSelectOption(value)}
         selectedValue={selectedOption}>
         {pickerOptions.map((option, index) => {

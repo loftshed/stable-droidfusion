@@ -47,7 +47,7 @@ export default function ControlledField({
 
   return (
     <View style={style}>
-      <Text style={styles.textFieldLabel}>{label}</Text>
+      <Text content={label} style={styles.textFieldLabel} />
       <Controller
         control={control}
         render={({field: {value, onChange}}) => (
